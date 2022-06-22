@@ -1,4 +1,8 @@
 export default {
+  v3basic: {
+    basic: 'v3基础',
+    dynamic: '响应式',
+  },
   charts: {
     baiduMap: '百度地图',
     aMap: '高德地图',
