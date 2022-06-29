@@ -122,7 +122,7 @@ const comp: AppRouteModule = {
         {
           path: 'basic',
           name: 'TableBasicDemo',
-          component: () => import('/@/views/demo/table/Basic.vue'),
+          component: () => import('../../../../views/demo/table/Basic.vue'),
           meta: {
             title: t('routes.demo.table.basic'),
           },
@@ -130,7 +130,7 @@ const comp: AppRouteModule = {
         {
           path: 'treeTable',
           name: 'TreeTableDemo',
-          component: () => import('/@/views/demo/table/TreeTable.vue'),
+          component: () => import('../../../../views/demo/table/TreeTable.vue'),
           meta: {
             title: t('routes.demo.table.treeTable'),
           },
@@ -154,7 +154,7 @@ const comp: AppRouteModule = {
         {
           path: 'customerCell',
           name: 'CustomerCellDemo',
-          component: () => import('/@/views/demo/table/CustomerCell.vue'),
+          component: () => import('../../../../views/demo/table/CustomerCell-v1.vue'),
           meta: {
             title: t('routes.demo.table.customerCell'),
           },

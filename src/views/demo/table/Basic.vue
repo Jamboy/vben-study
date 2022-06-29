@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Jamboy
+ * @Date: 2022-06-23 14:17:59
+ * @LastEditTime: 2022-06-23 14:20:30
+-->
 <template>
   <div class="p-4">
     <BasicTable
@@ -28,54 +34,37 @@
     </BasicTable>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+  import { ref } from 'vue';
   import { BasicTable, ColumnChangeParam } from '/@/components/Table';
   import { getBasicColumns, getBasicData } from './tableData';
 
-  export default defineComponent({
-    components: { BasicTable },
-    setup() {
-      const canResize = ref(false);
-      const loading = ref(false);
-      const striped = ref(true);
-      const border = ref(true);
-      const pagination = ref<any>(false);
-      function toggleCanResize() {
-        canResize.value = !canResize.value;
-      }
-      function toggleStriped() {
-        striped.value = !striped.value;
-      }
-      function toggleLoading() {
-        loading.value = true;
-        setTimeout(() => {
-          loading.value = false;
-          pagination.value = { pageSize: 20 };
-        }, 3000);
-      }
-      function toggleBorder() {
-        border.value = !border.value;
-      }
+  const canResize = ref(false);
+  const loading = ref(false);
+  const striped = ref(true);
+  const border = ref(true);
+  const pagination = ref<any>(false);
+  const columns = getBasicColumns();
+  const data = getBasicData();
 
-      function handleColumnChange(data: ColumnChangeParam[]) {
-        console.log('ColumnChanged', data);
-      }
+  function toggleCanResize() {
+    canResize.value = !canResize.value;
+  }
+  function toggleStriped() {
+    striped.value = !striped.value;
+  }
+  function toggleLoading() {
+    loading.value = true;
+    setTimeout(() => {
+      loading.value = false;
+      pagination.value = { pageSize: 20 };
+    }, 3000);
+  }
+  function toggleBorder() {
+    border.value = !border.value;
+  }
 
-      return {
-        columns: getBasicColumns(),
-        data: getBasicData(),
-        canResize,
-        loading,
-        striped,
-        border,
-        toggleStriped,
-        toggleCanResize,
-        toggleLoading,
-        toggleBorder,
-        pagination,
-        handleColumnChange,
-      };
-    },
-  });
+  function handleColumnChange(data: ColumnChangeParam[]) {
+    console.log('ColumnChanged', data);
+  }
 </script>
