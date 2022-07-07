@@ -2,6 +2,7 @@
   <div class="p-4">
     <BasicTable @register="registerTable">
       <template #bodyCell="{ column, record, text }">
+        <!-- 自定义单元格 -->
         <template v-if="column.key === 'id'"> ID: {{ record.id }} </template>
         <template v-if="column.key === 'no'">
           <Tag color="green">

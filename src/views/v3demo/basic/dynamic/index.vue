@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Jamboy
  * @Date: 2022-06-22 16:42:54
- * @LastEditTime: 2022-06-23 14:12:21
+ * @LastEditTime: 2022-06-29 15:53:14
 -->
 <template>
   <div ref="bookRef">{{ state.count }} </div>
@@ -14,9 +14,21 @@
   <div @click="refAdd">ref自动解包：{{ foo + 1 }}</div>
   <div @click="refAddTemp">ref 在响应式对象中的解包: {{ tempRef5 }}</div>
   <div @click="refAddTemp1">ref 在响应式对象中的解包: {{ tempProp }}</div>
+  <div>toRef 期望值 测试 :> {{ toRefName }}</div>
+  <div>toRef userInfo.title 前 :> {{ userInfo.title }}</div>
+  <div
+    @click="
+      {
+        {
+          toRefName = '修改';
+        }
+      }
+    "
+    >toRef 更改userInfo.title:></div
+  >
 </template>
 <script lang="ts" setup>
-  import { nextTick, reactive, ref } from 'vue';
+  import { nextTick, reactive, ref, toRef, toRefs } from 'vue';
   import type { Ref } from 'vue';
 
   const state = reactive({ count: 0 });
@@ -82,5 +94,32 @@
   // 数组和集合类型的 ref 解包
   const temp6 = reactive([ref(1)]);
   console.log('temp6: ', temp6[0].value);
+
+  //响应式 API 之 toRef 与 toRefs
+  interface Member {
+    id: number;
+    title: string;
+  }
+  const userInfo: Member = reactive({
+    id: 1,
+    title: '测试',
+  });
+
+  // toRef
+  // toRef 接收 2 个参数，第一个是 reactive 对象, 第二个是要转换的 key 。
+  const toRefName = toRef(userInfo, 'title');
+  // toRef 一个不存在的值，期望undefined ts 校验不通过
+  const toRefNotExist = toRef(userInfo, 'id');
+  console.log('toRefNotExist: ', toRefNotExist);
+  // toRefs toRefs 接收 1 个参数，是一个 reactive 对象。
+  const toRefsUserInfo = toRefs(userInfo);
+  console.log('toRefsUserInfo: ', toRefsUserInfo);
+  toRefsUserInfo.title.value = '修改1';
+  const { id, title } = toRefsUserInfo;
+  console.log('title: ', title.value);
+  console.log('id: ', id.value);
+  id.value = 12312;
+  console.log('id: ', id.value);
+  console.log('userInfo: ', userInfo.id);
 </script>
 <style lang="less" scoped></style>

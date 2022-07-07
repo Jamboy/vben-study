@@ -128,6 +128,14 @@ const comp: AppRouteModule = {
           },
         },
         {
+          path: 'basicSetup',
+          name: 'TableBasicSetupDemo',
+          component: () => import('/@/views/demo/table/BasicSetup.vue'),
+          meta: {
+            title: t('routes.demo.table.basicSetup'),
+          },
+        },
+        {
           path: 'treeTable',
           name: 'TreeTableDemo',
           component: () => import('../../../../views/demo/table/TreeTable.vue'),
